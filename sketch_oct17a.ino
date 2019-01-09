@@ -2,18 +2,19 @@
 #include <Keyboard.h>
 
 #include "capacitiveKey.h"
+#include "mechanicalKey.h"
 
 #define DISABLE_PIN 15
-
-bool butReleased = true;
-unsigned int butreleaseTimer;
 
 void setup() {
   Keyboard.begin();
   pinMode(DISABLE_PIN, INPUT_PULLUP);
-  pinMode(16, INPUT_PULLUP);
+  pinMode(21, INPUT_PULLUP);
+  pinMode(19, INPUT_PULLUP);
+  pinMode(14, INPUT_PULLUP);
+  pinMode(10, INPUT_PULLUP);
 }
-
+//capacitive keys:
 CapacitiveKey key0 = CapacitiveKey(
   2,    //Capacitive Send Pin
   7,    //Capacitive Sense Pin
@@ -26,50 +27,36 @@ CapacitiveKey key1 = CapacitiveKey(
   5,    //Capacitive Treshold
   'x'
 );
-CapacitiveKey key2 = CapacitiveKey(
-  21,    //Capacitive Send Pin
-  18,    //Capacitive Sense Pin
-  3,    //Capacitive Treshold
-  KEY_LEFT_SHIFT
+//mech keys:
+MechanicalKey mkey0 = MechanicalKey(
+  21,   //Mechanical pin
+  'd'
 );
-CapacitiveKey key0mod = CapacitiveKey(
-  2,    //Capacitive Send Pin
-  7,    //Capacitive Sense Pin
-  3,    //Capacitive Treshold
-  KEY_F1
+MechanicalKey mkey1 = MechanicalKey(
+  19,   //Mechanical pin
+  'f'
 );
-CapacitiveKey key1mod = CapacitiveKey(
-  4,    //Capacitive Send Pin
-  8,    //Capacitive Sense Pin
-  3,    //Capacitive Treshold
-  KEY_F2
+MechanicalKey mkey2 = MechanicalKey(
+  14,   //Mechanical pin
+  'j'
+);
+MechanicalKey mkey3 = MechanicalKey(
+  10,   //Mechanical pin
+  'k'
 );
 
 void loop() {
   bool keyboardActive = digitalRead(DISABLE_PIN);
+  
+mkey0.mkeyUpdate(keyboardActive);
+mkey1.mkeyUpdate(keyboardActive);
+mkey2.mkeyUpdate(keyboardActive);
+mkey3.mkeyUpdate(keyboardActive);
 
-  if (digitalRead(16) == LOW) {
-    if (butReleased) {
-      if (keyboardActive)
-          {
-              Keyboard.press('a');
-          }
-          butReleased = false;
-        }
-        butreleaseTimer = 20;
-  }
-      else {
-        if (!butReleased) {
-          if (butreleaseTimer == 0) {
-            Keyboard.release('a');
-            butReleased = true;
-          }
-          else {
-            butreleaseTimer--;
-          }
-        }
-      }
+key0.keyUpdate(keyboardActive);
+key1.keyUpdate(keyboardActive);
 
+//code for additional modificator keys
 //  key2.keyUpdate(keyboardActive);
 //    if (!key2.keyReleased)
   //  {
@@ -78,7 +65,7 @@ void loop() {
     //}
     //else
     //{
-  key0.keyUpdate(keyboardActive);
-  key1.keyUpdate(keyboardActive);
+  //key0.keyUpdate(keyboardActive);
+  //key1.keyUpdate(keyboardActive);
     //}
 }
