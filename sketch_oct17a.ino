@@ -53,8 +53,8 @@ mkey1.mkeyUpdate(keyboardActive);
 mkey2.mkeyUpdate(keyboardActive);
 mkey3.mkeyUpdate(keyboardActive);
 
-key0.keyUpdate(keyboardActive);
-key1.keyUpdate(keyboardActive);
+//key0.keyUpdate(keyboardActive);
+//key1.keyUpdate(keyboardActive);
 
 //code for additional modificator keys
 //  key2.keyUpdate(keyboardActive);
