@@ -17,13 +17,13 @@ void setup() {
 //capacitive keys:
 CapacitiveKey key0 = CapacitiveKey(
   2,    //Capacitive Send Pin
-  7,    //Capacitive Sense Pin
+  8,    //Capacitive Sense Pin
   5,    //Capacitive Treshold
   'z'
 );
 CapacitiveKey key1 = CapacitiveKey(
   4,    //Capacitive Send Pin
-  8,    //Capacitive Sense Pin
+  7,    //Capacitive Sense Pin
   5,    //Capacitive Treshold
   'x'
 );
@@ -53,8 +53,8 @@ mkey1.mkeyUpdate(keyboardActive);
 mkey2.mkeyUpdate(keyboardActive);
 mkey3.mkeyUpdate(keyboardActive);
 
-//key0.keyUpdate(keyboardActive);
-//key1.keyUpdate(keyboardActive);
+key0.keyUpdate(keyboardActive);
+key1.keyUpdate(keyboardActive);
 
 //code for additional modificator keys
 //  key2.keyUpdate(keyboardActive);
